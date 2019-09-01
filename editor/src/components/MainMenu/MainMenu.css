@@ -1,0 +1,70 @@
+.c-MainMenu {
+  background-color: var(--main-menu-bg);
+  border-bottom: 1px solid var(--main-menu-border);
+}
+
+.c-MainMenu_Nav {
+  display: flex;
+  height: 35px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-MainMenu_Nav .c-MainMenu_Nav {
+  background-color: var(--main-menu-bg);
+  border-bottom: 1px solid var(--main-menu-border);
+  border-left: 1px solid var(--main-menu-border);
+  border-right: 1px solid var(--main-menu-border);
+  flex-direction: column;
+  height: auto;
+  margin-top: 35px;
+  position: absolute;
+  left: -9999px;
+}
+
+.c-MainMenu_Nav .is-Visible .c-MainMenu_Nav {
+  left: 0;
+}
+
+.c-MainMenu_Nav .c-MainMenu_Nav .c-MainMenu_Nav {
+  left: -9999px;
+}
+
+.c-MainMenu_Nav .c-MainMenu_Nav .is-Visible .c-MainMenu_Nav {
+  left: 100%;
+  margin-top: 0;
+}
+
+.c-MainMenu_Nav .c-MainMenu_NavItem > .c-MainMenu_Nav .c-MainMenu_NavItemText {
+  margin-right: 2em;
+}
+
+.c-MainMenu_NavItem {
+  align-items: baseline;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  line-height: 35px;
+  margin: 0;
+  padding: 0 1em;
+  white-space: nowrap;
+}
+
+.c-MainMenu_NavItemText {
+  display: block;
+}
+
+.c-MainMenu_Separator {
+  border: 0;
+  border-bottom: 1px solid var(--main-menu-border);
+  width: 90%;
+  margin: 0.5em auto;
+}
+
+.c-MainMenu_NavItemContext {
+  font-size: 0.85em;
+  color: var(--main-menu-border);
+}
+
+

@@ -1,0 +1,23 @@
+:root {
+  --body-bg:  rgba(217, 224, 231, 1);
+  --sidebar-bg: rgba(45, 53, 60, 1);
+  --main-menu-bg: rgba(255, 255, 255, 1);
+  --main-menu-border: rgb(175, 183, 191);
+}
+
+.o-App {
+  background-color: var(--body-bg);
+  min-height: 100vh;
+}
+
+.o-ContentWrapper {
+  align-items: stretch;
+  display: flex;
+  min-height: 100vh;
+}
+
+.c-Sidebar {
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid rgba(0, 0, 0, 1);
+  width: 250px;
+}

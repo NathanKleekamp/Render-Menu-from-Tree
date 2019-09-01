@@ -1,0 +1,6 @@
+editor/node_modules
+Dockerfile*
+docker-compose*
+.dockerignore
+.git*
+README.md
