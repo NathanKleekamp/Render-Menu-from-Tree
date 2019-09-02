@@ -1,41 +1,42 @@
 import React from 'react';
 import uuidv4 from 'uuid';
+import MainMenuNav from './MainMenuNav';
 import MainMenuNavItem from './MainMenuNavItem';
 import MainMenuSeparator from './MainMenuSeparator';
-import { SEPARATOR } from './constants';
+import { SEPARATOR, MENU, MENU_ITEM } from './constants';
 
-// Recursively render the main menu from data
-export const renderMenu = (items) => {
-  const props = { className: 'c-MainMenu_Nav' };
-  const kids = items.reduce((accum, current) => {
-    const { id, kind, text, context, onClick, children = [] } = current;
-    let result;
-    let innerChild;
+const traverseNode = (node, visitor) => {
+  const { kind, props, children } = node;
+  return visitor[kind]({ props, children });
+};
 
-    if (kind === SEPARATOR) {
-      result = accum.concat(
-        <MainMenuSeparator key={ uuidv4() }/>
-      );
-      return result;
-    }
+const traverseArray = (nodes, visitor) => {
+  return nodes.map(node => traverseNode(node, visitor));
+};
 
-    if (children.length) {
-      innerChild = renderMenu(children);
-    }
-
-    result = accum.concat(
+const visitor = {
+  [MENU]: ({ children = [] }) => (
+    <MainMenuNav key={ uuidv4() }>
+      { traverseArray(children, visitor) }
+    </MainMenuNav>
+  ),
+  [SEPARATOR]: () => <MainMenuSeparator key={ uuidv4() } />,
+  [MENU_ITEM]: ({ props, children = [] }) => {
+    const { id, text, context, onClick } = props;
+    return (
       <MainMenuNavItem
-        id={ id }
         key={ uuidv4() }
+        id={ id }
         text={ text }
         context={ context }
         onClick={ onClick }
       >
-        { innerChild }
+        { traverseArray(children, visitor) }
       </MainMenuNavItem>
-    );
-    return result;
-  }, []);
+    )
+  },
+};
 
-  return React.createElement('ul', props, kids);
+export const renderMenu = (node) => {
+  return traverseNode(node, visitor);
 };

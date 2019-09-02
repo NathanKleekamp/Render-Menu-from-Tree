@@ -5,20 +5,29 @@ import './MainMenu.css';
 
 const DEFAULT_CLASS_NAME = 'c-MainMenu_NavItem';
 
+function NavItemText({ text }) {
+  return (
+    <span className="c-MainMenu_NavItemText">{text}</span>
+  );
+}
+
+function NavItemContext({ context }) {
+  return (
+    <span className="c-MainMenu_NavItemContext">{context}</span>
+  );
+}
+
 function MainMenuNavItem({ id, text, context, onClick, children }) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const textSpan = <span className="c-MainMenu_NavItemText" key={ uuidv4() }>{text}</span>
-  const contextSpan = <span className="c-MainMenu_NavItemContext" key={ uuidv4() }>{context}</span>
-
-  let kids = [textSpan];
+  let kids = [<NavItemText text={ text } key={ uuidv4() } />];
   let props = {
-    className: 'c-MainMenu_NavItem',
+    className: DEFAULT_CLASS_NAME,
     id,
   };
 
   if (context) {
-    kids = kids.concat(contextSpan);
+    kids = kids.concat(<NavItemContext context={ context } key={ uuidv4() }/>);
   }
 
   if (children) {
