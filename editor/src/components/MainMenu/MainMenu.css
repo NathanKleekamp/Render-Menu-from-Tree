@@ -1,6 +1,8 @@
 .c-MainMenu {
   background-color: var(--main-menu-bg);
   border-bottom: 1px solid var(--main-menu-border);
+  position: absolute;
+  width: 100%;
 }
 
 .c-MainMenu_Nav {
