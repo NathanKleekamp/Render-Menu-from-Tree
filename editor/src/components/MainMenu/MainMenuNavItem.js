@@ -19,23 +19,22 @@ function NavItemContext({ context }) {
 
 function MainMenuNavItem({ id, text, context, onClick, children }) {
   const [isVisible, setIsVisible] = useState(false);
-
-  let kids = [<NavItemText text={ text } key={ uuidv4() } />];
-  let props = {
+  const kids = [<NavItemText text={ text } key={ uuidv4() } />];
+  const props = {
     className: DEFAULT_CLASS_NAME,
     id,
   };
 
   if (context) {
-    kids = kids.concat(<NavItemContext context={ context } key={ uuidv4() }/>);
+    kids.push(<NavItemContext context={ context } key={ uuidv4() }/>);
   }
 
   if (children) {
-    kids = kids.concat(children);
+    kids.push(children);
   }
 
   if (onClick) {
-    props = Object.assign({}, props, {
+    Object.assign(props, {
       onClick: (event) => {
         onClick( event, { isVisible, setIsVisible });
       },
